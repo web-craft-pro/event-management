@@ -39,9 +39,13 @@
 <!-- ============ HERO ============ -->
 <section class="hero" id="hero">
   <div class="hero-media" aria-hidden="true">
-    <!-- Drop your image file into an "images" folder next to this HTML file,
-         then update the path below to match its filename, e.g. images/hero.jpg -->
-    <img src="images/hero.jpg" alt="" class="hero-img">
+    <!-- Drop two images into an "images" folder next to this HTML file:
+         images/hero-mobile.jpg  -> used on phones (portrait-friendly crop)
+         images/hero.jpg         -> used on tablets/desktops (wide crop) -->
+    <picture>
+      <source srcset="images/hero2.jpg" media="(max-width: 767px)">
+      <img src="images/hero2.jpg" alt="" class="hero-img">
+    </picture>
     <div class="hero-overlay"></div>
   </div>
 

@@ -186,17 +186,15 @@ h2 {
   .main-nav.open { transform: translateY(0); opacity: 1; }
 }
 
-/* ---------- HERO ---------- */
+/* ---------- HERO (shared base) ---------- */
 .hero {
   position: relative;
-  min-height: 92vh;
-  min-height: 100svh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
 }
 .hero-media { position: absolute; inset: 0; z-index: -1; background: var(--coffee); }
-.hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero-img { width: 100%; height: 100%; object-fit: cover; }
 .hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(46,27,18,0.35) 0%, rgba(46,27,18,0.55) 55%, rgba(46,27,18,0.9) 100%);
@@ -213,16 +211,38 @@ h2 {
 .hero-title {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(2.6rem, 9vw, 6.2rem);
-  line-height: 0.98;
   letter-spacing: -0.02em;
   margin-bottom: 1.2rem;
 }
 .hero-sub {
-  font-size: 0.95rem;
   max-width: 34ch;
   margin-bottom: 1.8rem;
   color: rgba(251,241,229,0.9);
+}
+
+/* ---------- HERO — SMARTPHONE (up to 767px) ---------- */
+@media (max-width: 767px) {
+  .hero {
+    min-height: 88svh;
+    min-height: 88vh; /* fallback for older mobile browsers */
+    align-items: flex-end;
+  }
+  .hero-img { object-position: top center; } /* keep faces/subjects near top in frame */
+  .hero-content { padding: 0 1.2rem 10rem; }
+  .hero-title { font-size: 2.0rem; line-height: 1; }
+  .hero-sub { font-size: 0.9rem; margin-bottom: 1.5rem; }
+}
+
+/* ---------- HERO — DESKTOP (768px and up) ---------- */
+@media (min-width: 768px) {
+  .hero {
+    min-height: 92vh;
+    align-items: flex-end;
+  }
+  .hero-img { object-position: center; }
+  .hero-content { padding: 0 1.5rem 5rem; }
+  .hero-title { font-size: clamp(3.2rem, 7.5vw, 6.2rem); line-height: 0.98; }
+  .hero-sub { font-size: 1rem; margin-bottom: 1.8rem; }
 }
 
 /* Signature: kasavu gold-thread strip along hero base */
@@ -436,81 +456,4 @@ h2 {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .fade-in, .fab, .btn { transition: none; }
-}
-
-/* ============================================================
-   SERVICES PAGE — page banner, alternating service rows, CTA banner
-   ============================================================ */
-
-/* ---------- PAGE BANNER (services.html / portfolio.html) ---------- */
-.page-banner {
-  position: relative;
-  background: var(--coffee);
-  padding: 6rem 1.5rem 3.5rem;
-  text-align: center;
-  overflow: hidden;
-}
-.page-banner-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
-.page-banner .eyebrow { color: var(--gold-light); }
-.page-banner h1 {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2.2rem, 6vw, 3.4rem);
-  color: var(--ivory);
-  letter-spacing: -0.01em;
-  margin-bottom: 0.8rem;
-}
-.page-banner-sub { color: rgba(251,241,229,0.8); font-size: 0.95rem; max-width: 46ch; margin: 0 auto; }
-.page-banner .kasavu-strip { opacity: 0.7; }
-
-/* ---------- SERVICE DETAIL ROWS ---------- */
-.service-detail { padding-top: 4rem; }
-.service-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.8rem;
-  align-items: center;
-  padding: 2.2rem 0;
-}
-.service-row + .service-row { border-top: 1px solid rgba(46,27,18,0.08); }
-.service-row-img img { border-radius: 8px; }
-.service-row-text .service-icon { font-size: 1.8rem; display: block; margin-bottom: 0.6rem; }
-.service-row-text h2 { color: var(--maroon); margin-bottom: 0.8rem; }
-.service-row-text p { font-size: 0.92rem; color: rgba(46,27,18,0.8); max-width: 52ch; }
-
-@media (min-width: 780px) {
-  .service-row { grid-template-columns: 1fr 1fr; gap: 3rem; }
-  .service-row.reverse .service-row-img { order: 2; }
-  .service-row.reverse .service-row-text { order: 1; }
-}
-
-/* ---------- PORTFOLIO DETAIL GRID ---------- */
-.portfolio-detail-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.4rem;
-}
-.portfolio-item img { border-radius: 6px; aspect-ratio: 1/1; object-fit: cover; }
-.portfolio-item figcaption {
-  margin-top: 0.5rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--clay);
-}
-@media (min-width: 640px) { .portfolio-detail-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 960px) { .portfolio-detail-grid { grid-template-columns: repeat(5, 1fr); } }
-
-/* ---------- CLOSING CTA BANNER ---------- */
-.cta-banner {
-  background: var(--maroon);
-  padding: 3.5rem 1.5rem;
-  text-align: center;
-}
-.cta-banner h2 {
-  font-family: var(--font-display);
-  color: var(--ivory);
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  margin-bottom: 1.4rem;
 }
